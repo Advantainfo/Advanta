@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #05060b;
+  --bg-elevated: #0a0d1a;
+  --bg-panel: #0e1226;
+  --bg-panel-border: #1c2140;
+
+  --fg: #f5f7ff;
+  --fg-muted: #9198b0;
+  /* Kept light enough to clear WCAG AA (4.5:1) on bg / bg-elevated / bg-panel —
+     see contrast audit in the SEO/accessibility pass. */
+  --fg-faint: #7b81a0;
+
+  --blue: #2f6fff;
+  --indigo: #6a3df5;
+  --violet: #8b3df0;
+  --magenta: #e934c5;
+  --cyan: #22d3ee;
+
+  --advanta-gradient: linear-gradient(
+    135deg,
+    var(--blue) 0%,
+    var(--indigo) 45%,
+    var(--violet) 65%,
+    var(--magenta) 100%
+  );
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --container-max: 1360px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-panel: var(--bg-panel);
+  --color-bg-panel-border: var(--bg-panel-border);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+
+  --color-blue: var(--blue);
+  --color-indigo: var(--indigo);
+  --color-violet: var(--violet);
+  --color-magenta: var(--magenta);
+  --color-cyan: var(--cyan);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --container-advanta: var(--container-max);
+}
+
+* {
+  border-color: var(--bg-panel-border);
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: "ss01" 1, "cv01" 1;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--violet) 55%, transparent);
+  color: var(--fg);
+}
+
+/* Focus states: visible, on-brand, never removed */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Utility: gradient text — @utility so it composes with variants like group-hover: */
+@utility text-gradient {
+  background-image: var(--advanta-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Utility: hairline borders that match the panel system */
+.border-hairline {
+  border: 1px solid var(--bg-panel-border);
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  background: var(--bg-elevated);
+  color: var(--fg);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--bg-panel-border);
+  transition: top 0.2s var(--ease-out-quart);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Reduced motion: strip transform/opacity transitions site-wide, keep state changes instant */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (min-width: 1px) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* Subtle animated gradient border — used sparingly on a couple of
+   emphasis containers, not globally. Degrades gracefully (static border)
+   in browsers without @property support. */
+.animated-border {
+  position: relative;
+}
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle),
+    color-mix(in srgb, var(--blue) 70%, transparent),
+    color-mix(in srgb, var(--violet) 70%, transparent),
+    color-mix(in srgb, var(--magenta) 70%, transparent),
+    color-mix(in srgb, var(--blue) 70%, transparent)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-spin 8s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-border::before {
+    animation: none;
+  }
+}
+
+@keyframes orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, -4%) scale(1.06);
+  }
+  66% {
+    transform: translate(-3%, 3%) scale(0.96);
+  }
+}
+
+.animate-orb-drift {
+  animation: orb-drift 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orb-drift {
+    animation: none;
+  }
+}
+
+@keyframes footer-glow {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-46%, -3%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+.animate-footer-glow {
+  animation: footer-glow 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-footer-glow {
+    animation: none;
+  }
+}
+
+/* Fine scrollbar to match the dark, engineered aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-panel-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-faint);
+}
