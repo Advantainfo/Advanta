@@ -45,7 +45,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       onPointerMove={handlePointerMove}
-      className="relative flex min-h-[92vh] items-center overflow-hidden bg-bg pt-24"
+      className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-bg pt-24"
     >
       {/* Atmosphere — dark, tech-forward field of light rather than a flat glow */}
       <motion.div className="absolute inset-0" style={{ x: orbX, y: orbY }} aria-hidden>
