@@ -5,6 +5,10 @@ const COLORS = {
   violet: "var(--violet)",
   magenta: "var(--magenta)",
   cyan: "var(--cyan)",
+  yellow: "var(--mkt-yellow)",
+  orange: "var(--mkt-orange)",
+  coral: "var(--mkt-coral)",
+  pink: "var(--mkt-pink)",
 };
 
 export function GlowOrb({

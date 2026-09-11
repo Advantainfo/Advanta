@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
 import { Logo } from "@/components/ui/Logo";
@@ -16,6 +17,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+  const isMarketing = pathname?.startsWith("/marketing") ?? false;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 24);
@@ -31,8 +34,18 @@ export function Navbar() {
             : "border-transparent bg-transparent")
         }
       >
-        <div className="mx-auto flex h-18 max-w-(--container-advanta) items-center justify-between px-6 md:px-10 lg:px-14">
-          <Logo priority size={32} />
+        <div
+          className={
+            "mx-auto flex max-w-(--container-advanta) items-center justify-between px-6 transition-[height] duration-300 md:px-10 lg:px-14 " +
+            (isMarketing ? "h-24" : "h-18")
+          }
+        >
+          <Logo
+            priority
+            size={isMarketing ? 68 : 32}
+            theme={isMarketing ? "marketing" : "default"}
+            href={isMarketing ? "/marketing" : "/"}
+          />
 
           <nav aria-label="Primary" className="hidden items-center gap-9 md:flex">
             {NAV_LINKS.map((link) => (

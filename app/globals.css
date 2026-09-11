@@ -26,6 +26,27 @@
     var(--magenta) 100%
   );
 
+  /* Advanta Marketing — warm division palette, sampled from the Marketing
+     logo (yellow → orange → coral → pink/magenta). Only ever active inside
+     .theme-marketing; the tech palette above is untouched. */
+  --mkt-yellow: #ffb020;
+  --mkt-orange: #ff7a1a;
+  --mkt-coral: #fb3a52;
+  --mkt-pink: #f0179a;
+  --marketing-gradient: linear-gradient(
+    120deg,
+    var(--mkt-yellow) 0%,
+    var(--mkt-orange) 38%,
+    var(--mkt-coral) 68%,
+    var(--mkt-pink) 100%
+  );
+
+  /* Indirection so shared components (Button, Footer) can be re-themed by
+     scope alone instead of needing marketing-aware variants. */
+  --btn-glow-1: rgba(139, 61, 240, 0.55);
+  --btn-glow-2: rgba(233, 52, 197, 0.5);
+  --footer-glow: var(--violet);
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 
@@ -48,10 +69,53 @@
   --color-magenta: var(--magenta);
   --color-cyan: var(--cyan);
 
+  --color-mkt-yellow: var(--mkt-yellow);
+  --color-mkt-orange: var(--mkt-orange);
+  --color-mkt-coral: var(--mkt-coral);
+  --color-mkt-pink: var(--mkt-pink);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
   --container-advanta: var(--container-max);
+}
+
+/*
+ * Advanta Marketing theme scope.
+ *
+ * Applied only to the subtree rendered while on /marketing (see
+ * components/layout/ThemeScope.tsx). Every existing component already reads
+ * color via these custom properties (bg-bg, text-fg, border-hairline,
+ * var(--advanta-gradient), etc.), so redefining them here re-skins the whole
+ * Marketing experience — nav, page content, footer — without any component
+ * needing to know which theme it's in. The global :root tokens above are
+ * untouched, so every other route keeps the dark tech palette exactly as-is.
+ */
+.theme-marketing {
+  color-scheme: light;
+
+  --bg: #fffcfa;
+  --bg-elevated: #fff7f0;
+  --bg-panel: #fff2e8;
+  --bg-panel-border: #efdfd3;
+
+  --fg: #201a17;
+  --fg-muted: #5c5049;
+  --fg-faint: #7d6f65;
+
+  --advanta-gradient: var(--marketing-gradient);
+  --btn-glow-1: rgba(255, 122, 26, 0.4);
+  --btn-glow-2: rgba(240, 23, 154, 0.38);
+  --footer-glow: var(--mkt-pink);
+}
+
+.theme-marketing ::selection {
+  background: color-mix(in srgb, var(--mkt-coral) 40%, transparent);
+  color: var(--fg);
+}
+
+.theme-marketing :focus-visible {
+  outline-color: var(--mkt-coral);
 }
 
 * {
