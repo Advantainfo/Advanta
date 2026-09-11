@@ -13,7 +13,7 @@ export function FeaturedProject({ entry }: { entry: WorkEntry }) {
       <ImageReveal className="relative aspect-[16/11] rounded-3xl">
         <ProjectVisual index={0} className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
         <div className="absolute top-5 left-5">
-          <PlaceholderBadge />
+          <PlaceholderBadge label={entry.badgeLabel} />
         </div>
       </ImageReveal>
 

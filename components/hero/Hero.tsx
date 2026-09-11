@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/animations/MagneticButton";
 import { RevealText } from "@/components/animations/RevealText";
 import { GlowOrb } from "@/components/animations/GlowOrb";
-import { Eyebrow } from "@/components/ui/SectionHeading";
 
 const HeroParticles = dynamic(() => import("@/components/hero/HeroParticles").then((m) => m.HeroParticles), {
   ssr: false,
@@ -85,32 +84,25 @@ export function Hero() {
             />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
-          >
-            <Eyebrow className="justify-center">Web · Marketing · Design</Eyebrow>
-          </motion.div>
-
-          <h1 className="mt-7 max-w-4xl text-5xl leading-[1.05] font-semibold tracking-tight text-fg sm:text-6xl md:text-7xl">
-            <RevealText text="Digital experiences that" delay={0.55} />{" "}
-            <RevealText text="move businesses forward." delay={0.95} className="text-gradient" />
+          <h1 className="mt-4 max-w-4xl text-5xl leading-[1.05] font-semibold tracking-tight text-fg sm:text-6xl md:text-7xl">
+            <RevealText text="Digital experiences that" delay={0.3} />{" "}
+            <RevealText text="move businesses forward." delay={0.7} className="text-gradient" />
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.5, ease: EASE }}
+            transition={{ duration: 0.7, delay: 1.25, ease: EASE }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-fg-muted"
           >
-            We design, build and grow digital experiences for businesses ready to move further.
+            We design and build high-performance websites and digital solutions that help
+            businesses grow.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.75, ease: EASE }}
+            transition={{ duration: 0.7, delay: 1.5, ease: EASE }}
             className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
           >
             <MagneticButton>
@@ -120,7 +112,7 @@ export function Hero() {
             </MagneticButton>
             <MagneticButton>
               <Button href="/work" variant="secondary" size="lg">
-                Explore our work
+                View our work
               </Button>
             </MagneticButton>
           </motion.div>

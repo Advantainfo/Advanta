@@ -1,7 +1,28 @@
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
-import { Button } from "@/components/ui/Button";
 import { FOOTER_LINKS, SITE, SOCIAL_LINKS } from "@/lib/constants";
+
+const SOCIAL_ICONS: Record<string, React.ReactNode> = {
+  LinkedIn: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5C4.11 3.5 3.25 4.37 3.25 5.47C3.25 6.55 4.09 7.44 5.22 7.44H5.25C6.41 7.44 7.25 6.55 7.25 5.47C7.23 4.37 6.41 3.5 5.25 3.5Z"
+        fill="currentColor"
+      />
+      <path
+        d="M20.75 13.61V20.5H17.38V14C17.38 12.39 16.8 11.29 15.36 11.29C14.26 11.29 13.6 12.03 13.31 12.75C13.2 13.01 13.18 13.38 13.18 13.75V20.5H9.8C9.8 20.5 9.85 9.47 9.8 8.5H13.18V9.94C13.63 9.25 14.44 8.27 16.78 8.27C19.68 8.27 20.75 10.34 20.75 13.61Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  Instagram: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="17.15" cy="6.85" r="1" fill="currentColor" />
+    </svg>
+  ),
+};
 
 function FooterColumn({
   title,
@@ -43,9 +64,21 @@ export function Footer() {
             <p className="max-w-xs text-lg leading-relaxed text-fg-muted">
               Digital experiences that move businesses forward.
             </p>
-            <Button href="/contact" variant="secondary" className="w-fit">
-              Start a project
-            </Button>
+            <ul className="flex items-center gap-3">
+              {SOCIAL_LINKS.map((social) => (
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.ariaLabel}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-fg-faint transition-colors duration-300 hover:border-fg-faint hover:text-fg"
+                  >
+                    {SOCIAL_ICONS[social.label]}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <FooterColumn title="Navigate" links={FOOTER_LINKS.navigate} />
@@ -65,18 +98,6 @@ export function Footer() {
                 </a>
               </li>
               <li>{SITE.addressLine}</li>
-            </ul>
-            <ul className="mt-2 flex gap-4">
-              {SOCIAL_LINKS.map((social) => (
-                <li key={social.label}>
-                  <a
-                    href={social.href}
-                    className="text-sm text-fg-faint transition-colors hover:text-fg"
-                  >
-                    {social.label}
-                  </a>
-                </li>
-              ))}
             </ul>
           </div>
         </div>

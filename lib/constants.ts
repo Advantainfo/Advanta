@@ -36,8 +36,15 @@ export const FOOTER_LINKS = {
   ],
 } as const;
 
-// Placeholder until real profiles exist — intentionally unlinked (href "#").
 export const SOCIAL_LINKS = [
-  { label: "LinkedIn", href: "#" },
-  { label: "Instagram", href: "#" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/advantagroup",
+    ariaLabel: "Advanta on LinkedIn",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/advantabv/",
+    ariaLabel: "Advanta on Instagram",
+  },
 ] as const;

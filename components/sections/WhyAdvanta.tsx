@@ -8,25 +8,27 @@ export function WhyAdvanta() {
     <section className="py-24 md:py-32">
       <Container>
         <SectionHeading
+          align="center"
           eyebrow="Why Advanta"
           title="A digital partner built around outcomes, not deliverables."
+          className="mx-auto"
         />
 
-        <div className="mt-16 border-t border-hairline">
+        <div className="mx-auto mt-20 grid max-w-5xl grid-cols-1 gap-14 md:grid-cols-3 md:gap-0">
           {WHY_PILLARS.map((pillar, i) => (
-            <InView key={pillar.index} y={20} delay={i * 0.05}>
-              <div className="group grid grid-cols-1 gap-4 border-b border-hairline py-10 transition-colors md:grid-cols-[auto_1fr] md:items-center md:gap-12">
-                <span className="font-mono text-6xl leading-none font-medium text-fg-faint transition-colors duration-500 group-hover:text-gradient md:text-7xl">
+            <InView key={pillar.index} y={20} delay={i * 0.08}>
+              <div
+                className={
+                  i > 0
+                    ? "flex flex-col gap-4 text-center md:border-l md:border-hairline md:px-10"
+                    : "flex flex-col gap-4 text-center md:px-10"
+                }
+              >
+                <span className="mx-auto font-mono text-sm tabular-nums text-fg-faint">
                   {pillar.index}
                 </span>
-                <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:gap-12">
-                  <h3 className="text-2xl font-semibold tracking-tight text-fg md:w-72 md:shrink-0">
-                    {pillar.title}
-                  </h3>
-                  <p className="max-w-xl text-base leading-relaxed text-fg-muted md:text-lg">
-                    {pillar.description}
-                  </p>
-                </div>
+                <h3 className="text-xl font-semibold tracking-tight text-fg">{pillar.title}</h3>
+                <p className="text-base leading-relaxed text-fg-muted">{pillar.description}</p>
               </div>
             </InView>
           ))}

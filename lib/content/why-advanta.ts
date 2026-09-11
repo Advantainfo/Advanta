@@ -7,25 +7,17 @@ export type WhyPillar = {
 export const WHY_PILLARS: WhyPillar[] = [
   {
     index: "01",
-    title: "Strategy first",
-    description:
-      "We don't build digital products without understanding the business behind them.",
+    title: "Strategy before execution",
+    description: "We understand the business before building the solution.",
   },
   {
     index: "02",
-    title: "Built to perform",
-    description:
-      "Performance, SEO and conversion are considered from the beginning, not bolted on after launch.",
+    title: "Built for performance",
+    description: "Speed, SEO and conversion are part of the build from day one.",
   },
   {
     index: "03",
-    title: "One digital partner",
-    description:
-      "Design, development, marketing and ongoing support, in one place, from one team.",
-  },
-  {
-    index: "04",
-    title: "Long-term thinking",
-    description: "We don't disappear after launch. The work continues once the site is live.",
+    title: "A long-term partner",
+    description: "We stay involved after launch to help your digital presence grow.",
   },
 ];

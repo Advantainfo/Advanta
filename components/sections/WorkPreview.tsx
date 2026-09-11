@@ -12,11 +12,7 @@ export function WorkPreview() {
     <section className="py-24 md:py-32">
       <Container>
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-          <SectionHeading
-            eyebrow="Selected work"
-            title="Built with the same care we bring to every project."
-            description="Advanta is a new studio — this is the range of work we take on, with real case studies published as projects go live."
-          />
+          <SectionHeading title="Selected Work" description="See what we've built." />
           <Button href="/work" variant="secondary" className="shrink-0">
             View all work
           </Button>

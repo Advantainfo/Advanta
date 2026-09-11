@@ -1,107 +1,78 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { SERVICES } from "@/lib/content/services";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { cn } from "@/lib/cn";
+import { InView } from "@/components/animations/InView";
 
-const ACCENTS = ["var(--blue)", "var(--cyan)", "var(--violet)", "var(--magenta)"];
+const HOME_SERVICES = [
+  {
+    index: "01",
+    accent: "var(--blue)",
+    title: "Web Development",
+    description: "Websites, web apps, e-commerce and custom digital solutions.",
+  },
+  {
+    index: "02",
+    accent: "var(--cyan)",
+    title: "Digital Marketing",
+    description: "SEO, advertising and strategies designed to generate growth.",
+  },
+  {
+    index: "03",
+    accent: "var(--violet)",
+    title: "Design & Branding",
+    description: "Brands and digital experiences people remember.",
+  },
+  {
+    index: "04",
+    accent: "var(--magenta)",
+    title: "Ongoing Growth",
+    description: "Maintenance, optimization and continuous support.",
+  },
+] as const;
 
 export function ServicesShowcase() {
-  const [active, setActive] = useState(0);
-  const service = SERVICES[active];
-  const accent = ACCENTS[active];
-
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-30 transition-[background] duration-700 ease-out"
-        style={{
-          background: `radial-gradient(60% 50% at 15% 20%, color-mix(in srgb, ${accent} 22%, transparent), transparent 70%)`,
-        }}
-      />
+    <section className="py-24 md:py-32">
+      <Container>
+        <SectionHeading title="Everything your business needs digitally." />
 
-      <Container className="relative">
-        <SectionHeading
-          eyebrow="What we do"
-          title="Four disciplines. One digital partner."
-          description="Each service stands on its own — together, they cover the full lifecycle of a digital presence."
-        />
-
-        <div className="mt-16 grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-[0.95fr_1.05fr]">
-          <ul className="flex flex-col overflow-hidden rounded-2xl border border-hairline bg-bg-panel/20">
-            {SERVICES.map((item, i) => (
-              <li
-                key={item.id}
-                className={cn(i !== SERVICES.length - 1 && "border-b border-hairline")}
+        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
+          {HOME_SERVICES.map((service, i) => (
+            <InView key={service.index} as="div" delay={i * 0.06} y={16} className="h-full">
+              <div
+                className="group relative flex h-full flex-col gap-6 bg-bg-panel/50 p-8 transition-colors duration-300 hover:bg-bg-panel"
+                style={{ "--accent": service.accent } as React.CSSProperties}
               >
-                <button
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  aria-pressed={active === i}
-                  className="group flex w-full items-baseline gap-5 px-6 py-6 text-left transition-colors"
-                >
-                  <span
-                    className={cn(
-                      "font-mono text-sm tabular-nums transition-colors duration-300",
-                      active === i ? "text-fg" : "text-fg-faint",
-                    )}
-                    style={active === i ? { color: accent } : undefined}
-                  >
-                    {item.index}
-                  </span>
-                  <span
-                    className={cn(
-                      "text-2xl font-semibold tracking-tight transition-colors duration-300 sm:text-3xl md:text-4xl",
-                      active === i ? "text-fg" : "text-fg-faint group-hover:text-fg-muted",
-                    )}
-                  >
-                    {item.code}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <div className="animated-border relative min-h-[280px] rounded-2xl bg-bg-panel/40 p-8 md:p-10">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <p className="text-xs font-medium tracking-[0.25em] uppercase" style={{ color: accent }}>
-                  {service.title}
-                </p>
-                <p className="mt-4 text-xl leading-snug font-medium text-fg md:text-2xl">
-                  {service.summary}
-                </p>
-                <p className="mt-5 max-w-lg text-base leading-relaxed text-fg-muted">
-                  {service.description}
-                </p>
-                <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {service.capabilities.map((cap) => (
-                    <li key={cap} className="flex items-start gap-2.5 text-sm text-fg-muted">
-                      <span
-                        aria-hidden
-                        className="mt-2 h-1 w-1 shrink-0 rounded-full"
-                        style={{ background: accent }}
-                      />
-                      {cap}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                <span className="font-mono text-sm tabular-nums text-fg-faint transition-colors duration-300 group-hover:text-[var(--accent)]">
+                  {service.index}
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold tracking-tight text-fg">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-fg-muted">
+                    {service.description}
+                  </p>
+                </div>
+                <span
+                  aria-hidden
+                  className="mt-auto h-px w-8 origin-left scale-x-100 transition-all duration-300 group-hover:w-12"
+                  style={{ background: service.accent }}
+                />
+              </div>
+            </InView>
+          ))}
         </div>
+
+        <InView delay={0.2} className="mt-10 flex justify-end">
+          <Link
+            href="/services"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+          >
+            Explore all services
+            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+        </InView>
       </Container>
     </section>
   );

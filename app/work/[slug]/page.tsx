@@ -69,7 +69,7 @@ export default async function WorkCaseStudyPage({
             ← All work
           </Link>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <PlaceholderBadge />
+            <PlaceholderBadge label={entry.badgeLabel} />
           </div>
           <h1 className="mt-6 max-w-3xl text-4xl leading-[1.05] font-semibold tracking-tight text-fg sm:text-5xl md:text-6xl">
             {entry.title}
