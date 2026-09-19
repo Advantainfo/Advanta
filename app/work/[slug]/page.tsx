@@ -4,7 +4,7 @@ import Link from "next/link";
 import { WORK_ENTRIES, getWorkEntry } from "@/lib/content/work";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/SectionHeading";
-import { ProjectVisual } from "@/components/projects/ProjectVisual";
+import { ProjectMedia } from "@/components/projects/ProjectMedia";
 import { PlaceholderBadge } from "@/components/projects/PlaceholderBadge";
 import { InView } from "@/components/animations/InView";
 import { ImageReveal } from "@/components/animations/ImageReveal";
@@ -90,7 +90,7 @@ export default async function WorkCaseStudyPage({
       <section className="pb-16">
         <Container>
           <ImageReveal className="aspect-[16/9] rounded-3xl">
-            <ProjectVisual index={index} className="h-full w-full" />
+            <ProjectMedia entry={entry} index={index} className="h-full w-full" />
           </ImageReveal>
         </Container>
       </section>

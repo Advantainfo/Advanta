@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { WorkEntry } from "@/lib/content/work";
-import { ProjectVisual } from "@/components/projects/ProjectVisual";
+import { ProjectMedia } from "@/components/projects/ProjectMedia";
 import { PlaceholderBadge } from "@/components/projects/PlaceholderBadge";
 import { ImageReveal } from "@/components/animations/ImageReveal";
 
@@ -11,7 +11,7 @@ export function FeaturedProject({ entry }: { entry: WorkEntry }) {
       className="group grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16"
     >
       <ImageReveal className="relative aspect-[16/11] rounded-3xl">
-        <ProjectVisual index={0} className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
+        <ProjectMedia entry={entry} index={0} className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
         <div className="absolute top-5 left-5">
           <PlaceholderBadge label={entry.badgeLabel} />
         </div>

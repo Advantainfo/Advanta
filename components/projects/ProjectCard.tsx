@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { WorkEntry } from "@/lib/content/work";
-import { ProjectVisual } from "@/components/projects/ProjectVisual";
+import { ProjectMedia } from "@/components/projects/ProjectMedia";
 import { PlaceholderBadge } from "@/components/projects/PlaceholderBadge";
 import { ImageReveal } from "@/components/animations/ImageReveal";
 
@@ -8,7 +8,7 @@ export function ProjectCard({ entry, index = 0 }: { entry: WorkEntry; index?: nu
   return (
     <Link href={`/work/${entry.slug}`} className="group flex flex-col gap-5">
       <ImageReveal className="relative aspect-[4/3] rounded-2xl">
-        <ProjectVisual index={index} className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+        <ProjectMedia entry={entry} index={index} className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
         <div className="absolute top-4 left-4">
           <PlaceholderBadge label={entry.badgeLabel} />
         </div>

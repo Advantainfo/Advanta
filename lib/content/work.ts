@@ -9,6 +9,8 @@ export type WorkEntry = {
   strategy?: string;
   /** Overrides the default "Case study coming soon" badge shown on cards and the case page. */
   badgeLabel?: string;
+  /** Looping preview clip shown behind the project card/hero visual, in public/work. */
+  videoSrc?: string;
 };
 
 // Advanta is a web-focused studio — these entries represent three different levels
@@ -25,6 +27,7 @@ export const WORK_ENTRIES: WorkEntry[] = [
       "A cinematic, scroll-driven product experience where motion, 3D and interaction turn browsing into storytelling.",
     isPlaceholder: true,
     badgeLabel: "Concept Project — not client work",
+    videoSrc: "/work/interactive-product-experience.mp4",
     challenge:
       "Most product websites default to static images and scroll-triggered fades. We wanted to explore what happens when scrolling doesn't just reveal content, but directly drives a cinematic product animation — the way a film timeline responds to a scrubber.",
     strategy:
@@ -43,6 +46,7 @@ export const WORK_ENTRIES: WorkEntry[] = [
     summary:
       "A custom web platform that brings scheduling, operations and business data into one clean, unified dashboard.",
     isPlaceholder: true,
+    videoSrc: "/work/business-management-platform.mp4",
     challenge:
       "This slot is reserved for a full write-up: the business problem, the constraints, and what a good outcome needed to look like.",
     strategy:
@@ -56,6 +60,7 @@ export const WORK_ENTRIES: WorkEntry[] = [
     summary:
       "A warm, fast-loading restaurant website built to showcase the menu and atmosphere, and make booking a table effortless.",
     isPlaceholder: true,
+    videoSrc: "/work/restaurant-website.mp4",
     challenge:
       "This slot is reserved for a full write-up: the business problem, the constraints, and what a good outcome needed to look like.",
     strategy:
