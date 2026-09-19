@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { INSIGHTS } from "@/lib/content/insights";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { InView } from "@/components/animations/InView";
-import { formatDate } from "@/lib/format";
+import { FeaturedInsight } from "@/components/insights/FeaturedInsight";
+import { InsightCard } from "@/components/insights/InsightCard";
 import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildMetadata({
@@ -30,46 +30,16 @@ export default function InsightsPage() {
       <section className="pb-24 md:pb-32">
         <Container>
           {featured ? (
-            <InView>
-              <Link
-                href={`/insights/${featured.slug}`}
-                className="group flex flex-col gap-5 border-t border-hairline pt-14"
-              >
-                <p className="text-xs font-medium tracking-[0.2em] text-fg-faint uppercase">
-                  {featured.topic} · {formatDate(featured.publishedAt)} · {featured.readingTime}
-                </p>
-                <h2 className="max-w-3xl text-3xl leading-snug font-semibold tracking-tight text-fg transition-colors group-hover:text-fg/80 sm:text-4xl md:text-5xl">
-                  {featured.title}
-                </h2>
-                <p className="max-w-xl text-base leading-relaxed text-fg-muted md:text-lg">
-                  {featured.description}
-                </p>
-                <span className="text-sm font-medium text-fg-muted transition-colors group-hover:text-fg">
-                  Read article →
-                </span>
-              </Link>
+            <InView className="border-t border-hairline pt-14">
+              <FeaturedInsight article={featured} />
             </InView>
           ) : null}
 
           {rest.length ? (
-            <div className="mt-16 grid grid-cols-1 gap-8 border-t border-hairline pt-14 md:grid-cols-2">
+            <div className="mt-20 grid grid-cols-1 gap-x-10 gap-y-16 border-t border-hairline pt-14 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((article, i) => (
-                <InView key={article.slug} delay={(i % 2) * 0.06}>
-                  <Link
-                    href={`/insights/${article.slug}`}
-                    className="group flex h-full flex-col gap-4 rounded-2xl border border-hairline bg-bg-panel/30 p-6 transition-colors duration-300 hover:border-fg-faint hover:bg-bg-panel/60 md:p-8"
-                  >
-                    <p className="text-xs font-medium tracking-[0.2em] text-fg-faint uppercase">
-                      {article.topic} · {formatDate(article.publishedAt)} · {article.readingTime}
-                    </p>
-                    <h2 className="text-xl leading-snug font-semibold tracking-tight text-fg transition-colors group-hover:text-fg/80">
-                      {article.title}
-                    </h2>
-                    <p className="text-sm leading-relaxed text-fg-muted">{article.description}</p>
-                    <span className="mt-auto pt-1 text-sm font-medium text-fg-muted transition-colors group-hover:text-fg">
-                      Read article →
-                    </span>
-                  </Link>
+                <InView key={article.slug} delay={(i % 3) * 0.06}>
+                  <InsightCard article={article} />
                 </InView>
               ))}
             </div>

@@ -6,7 +6,11 @@ export function ArticleBody({ blocks }: { blocks: ContentBlock[] }) {
       {blocks.map((block, i) => {
         if (block.type === "h2") {
           return (
-            <h2 key={i} className="mt-6 text-2xl font-semibold tracking-tight text-fg md:text-3xl">
+            <h2
+              key={i}
+              className="mt-6 flex items-center gap-3 text-2xl font-semibold tracking-tight text-fg md:text-3xl"
+            >
+              <span className="h-px w-6 shrink-0 [background:var(--advanta-gradient)]" aria-hidden />
               {block.text}
             </h2>
           );

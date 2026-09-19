@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { INSIGHTS, getInsightArticle } from "@/lib/content/insights";
+import { INSIGHTS, getInsightArticle, getRelatedInsights } from "@/lib/content/insights";
 import { Container } from "@/components/ui/Container";
 import { ArticleBody } from "@/components/ui/ArticleBody";
 import { InView } from "@/components/animations/InView";
+import { ImageReveal } from "@/components/animations/ImageReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { InsightVisual } from "@/components/insights/InsightVisual";
+import { TopicBadge } from "@/components/insights/TopicBadge";
+import { InsightCard } from "@/components/insights/InsightCard";
+import { Eyebrow } from "@/components/ui/SectionHeading";
 import { formatDate } from "@/lib/format";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { SITE, SITE_URL } from "@/lib/constants";
@@ -39,6 +44,8 @@ export default async function InsightArticlePage({
   const article = getInsightArticle(slug);
   if (!article) notFound();
 
+  const related = getRelatedInsights(slug);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -63,15 +70,26 @@ export default async function InsightArticlePage({
             <Link href="/insights" className="text-sm text-fg-muted transition-colors hover:text-fg">
               ← All insights
             </Link>
-            <p className="mt-8 text-xs font-medium tracking-[0.25em] text-fg-faint uppercase">
-              {article.topic} · {formatDate(article.publishedAt)} · {article.readingTime}
-            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <TopicBadge topic={article.topic} />
+              <p className="text-xs font-medium tracking-[0.25em] text-fg-faint uppercase">
+                {formatDate(article.publishedAt)} · {article.readingTime}
+              </p>
+            </div>
             <h1 className="mt-6 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-fg sm:text-5xl">
               {article.title}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-fg-muted">
               {article.description}
             </p>
+          </Container>
+        </section>
+
+        <section className="pb-16">
+          <Container>
+            <ImageReveal className="aspect-[21/9] rounded-3xl">
+              <InsightVisual topic={article.topic} className="h-full w-full" />
+            </ImageReveal>
           </Container>
         </section>
 
@@ -83,6 +101,21 @@ export default async function InsightArticlePage({
           </Container>
         </section>
       </article>
+
+      {related.length ? (
+        <section className="border-t border-hairline py-20 md:py-28">
+          <Container>
+            <Eyebrow>More insights</Eyebrow>
+            <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((item, i) => (
+                <InView key={item.slug} delay={i * 0.06}>
+                  <InsightCard article={item} />
+                </InView>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       <FinalCTA />
     </>

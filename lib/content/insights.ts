@@ -239,3 +239,17 @@ export const INSIGHTS: InsightArticle[] = [
 export function getInsightArticle(slug: string) {
   return INSIGHTS.find((a) => a.slug === slug);
 }
+
+/** Same-topic articles first, then the most recent others, excluding the current one. */
+export function getRelatedInsights(slug: string, limit = 3) {
+  const current = getInsightArticle(slug);
+  const others = INSIGHTS.filter((a) => a.slug !== slug);
+  if (!current) return others.slice(0, limit);
+
+  const sameTopic = others.filter((a) => a.topic === current.topic);
+  const rest = others
+    .filter((a) => a.topic !== current.topic)
+    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
+
+  return [...sameTopic, ...rest].slice(0, limit);
+}
