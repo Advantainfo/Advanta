@@ -88,7 +88,7 @@ export default async function InsightArticlePage({
         <section className="pb-16">
           <Container>
             <ImageReveal className="aspect-[21/9] rounded-3xl">
-              <InsightVisual topic={article.topic} className="h-full w-full" />
+              <InsightVisual article={article} className="h-full w-full" />
             </ImageReveal>
           </Container>
         </section>

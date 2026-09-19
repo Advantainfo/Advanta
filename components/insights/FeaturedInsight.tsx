@@ -13,7 +13,7 @@ export function FeaturedInsight({ article }: { article: InsightArticle }) {
     >
       <ImageReveal className="relative aspect-[16/11] rounded-3xl">
         <InsightVisual
-          topic={article.topic}
+          article={article}
           className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
         />
         <div className="absolute top-5 left-5">

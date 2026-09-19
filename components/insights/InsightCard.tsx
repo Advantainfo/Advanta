@@ -10,7 +10,7 @@ export function InsightCard({ article }: { article: InsightArticle }) {
     <Link href={`/insights/${article.slug}`} className="group flex flex-col gap-5">
       <ImageReveal className="relative aspect-[16/10] rounded-2xl">
         <InsightVisual
-          topic={article.topic}
+          article={article}
           className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
         <div className="absolute top-4 left-4">

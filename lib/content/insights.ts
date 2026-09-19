@@ -11,11 +11,14 @@ export type InsightArticle = {
   publishedAt: string; // ISO date
   readingTime: string;
   body: ContentBlock[];
+  /** Header photo, in public/insights. Falls back to the abstract topic visual when unset. */
+  image?: string;
 };
 
 export const INSIGHTS: InsightArticle[] = [
   {
     slug: "how-much-does-a-business-website-cost-in-belgium",
+    image: "/insights/how-much-does-a-business-website-cost-in-belgium.jpg",
     title: "How much does a business website cost in Belgium?",
     description:
       "A realistic breakdown of what shapes web development pricing in Belgium — and why the cheapest quote is rarely the cheapest outcome.",
@@ -55,6 +58,7 @@ export const INSIGHTS: InsightArticle[] = [
   },
   {
     slug: "why-isnt-my-business-appearing-on-google",
+    image: "/insights/why-isnt-my-business-appearing-on-google.jpg",
     title: "Why isn't my business appearing on Google?",
     description:
       "The most common, unglamorous reasons a website doesn't show up in search — and what to check before assuming it's an algorithm problem.",
@@ -94,6 +98,7 @@ export const INSIGHTS: InsightArticle[] = [
   },
   {
     slug: "what-makes-a-high-converting-website",
+    image: "/insights/what-makes-a-high-converting-website.jpg",
     title: "What makes a high-converting website?",
     description:
       "Conversion isn't a trick or a color of button. It's clarity, trust and reduced friction, applied consistently.",
@@ -133,6 +138,7 @@ export const INSIGHTS: InsightArticle[] = [
   },
   {
     slug: "why-website-performance-matters",
+    image: "/insights/why-website-performance-matters.jpg",
     title: "Why website performance matters",
     description:
       "Speed isn't a technical detail — it shapes how visitors judge your business before they read a single word.",
@@ -168,6 +174,7 @@ export const INSIGHTS: InsightArticle[] = [
   },
   {
     slug: "how-local-seo-helps-belgian-businesses",
+    image: "/insights/how-local-seo-helps-belgian-businesses.jpg",
     title: "How local SEO helps Belgian businesses",
     description:
       "For most local and regional businesses in Belgium, showing up in local search matters more than ranking nationally.",
@@ -202,6 +209,7 @@ export const INSIGHTS: InsightArticle[] = [
   },
   {
     slug: "website-maintenance-what-businesses-actually-need",
+    image: "/insights/website-maintenance-what-businesses-actually-need.jpg",
     title: "Website maintenance: what businesses actually need",
     description:
       "Maintenance isn't just \"keeping the lights on.\" Here's what ongoing care for a business website should really include.",
