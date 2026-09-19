@@ -1,6 +1,3 @@
-"use client";
-
-import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { FOOTER_LINKS, SITE, SOCIAL_LINKS } from "@/lib/constants";
@@ -52,24 +49,18 @@ function FooterColumn({
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const pathname = usePathname();
-  const isMarketing = pathname?.startsWith("/marketing") ?? false;
 
   return (
     <footer className="relative overflow-hidden border-t border-hairline bg-bg-elevated">
       {/* Strong, subtle visual ending — ambient Advanta light, GPU-cheap (transform/opacity only) */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[420px] overflow-hidden" aria-hidden>
-        <div className="absolute left-1/2 bottom-[-260px] h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--footer-glow)_28%,transparent),transparent_70%)] animate-footer-glow" />
+        <div className="absolute left-1/2 bottom-[-260px] h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--violet)_28%,transparent),transparent_70%)] animate-footer-glow" />
       </div>
 
       <Container className="relative py-20 md:py-24">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div className="flex flex-col gap-6">
-            <Logo
-              size={isMarketing ? 112 : 30}
-              theme={isMarketing ? "marketing" : "default"}
-              href={isMarketing ? "/marketing" : "/"}
-            />
+            <Logo size={30} href="/" />
             <p className="max-w-xs text-lg leading-relaxed text-fg-muted">
               Digital experiences that move businesses forward.
             </p>

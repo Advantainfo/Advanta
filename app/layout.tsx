@@ -7,7 +7,7 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { MotionProvider } from "@/components/layout/MotionProvider";
-import { ThemeScope } from "@/components/layout/ThemeScope";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -83,15 +83,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <MotionProvider>
-          <ThemeScope>
-            <SkipLink />
-            <ScrollProgress />
-            <Navbar />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </ThemeScope>
+          <SkipLink />
+          <ScrollProgress />
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <CookieConsent />
         </MotionProvider>
       </body>
     </html>

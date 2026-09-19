@@ -29,7 +29,7 @@ const sizes = {
 
 const variants = {
   primary:
-    "text-white [background:var(--advanta-gradient)] shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_8px_30px_-10px_var(--btn-glow-1)] hover:brightness-110 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.18)_inset,0_10px_36px_-8px_var(--btn-glow-2)]",
+    "text-white [background:var(--advanta-gradient)] shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_8px_30px_-10px_rgba(139,61,240,0.55)] hover:brightness-110 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.18)_inset,0_10px_36px_-8px_rgba(233,52,197,0.5)]",
   secondary:
     "text-fg border border-hairline bg-bg-panel/60 hover:border-fg-faint hover:bg-bg-panel",
   ghost: "text-fg-muted hover:text-fg",

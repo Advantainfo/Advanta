@@ -15,7 +15,6 @@ export function MobileMenu({
   onClose: () => void;
 }) {
   const pathname = usePathname();
-  const isMarketing = pathname?.startsWith("/marketing") ?? false;
   const panelRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -75,17 +74,8 @@ export function MobileMenu({
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            {isMarketing ? (
-              <>
-                <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-mkt-pink/20 blur-[100px]" />
-                <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-mkt-orange/20 blur-[100px]" />
-              </>
-            ) : (
-              <>
-                <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-violet/25 blur-[100px]" />
-                <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-blue/20 blur-[100px]" />
-              </>
-            )}
+            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-violet/25 blur-[100px]" />
+            <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-blue/20 blur-[100px]" />
           </div>
 
           <nav className="relative z-10 mt-24 flex flex-1 flex-col justify-between px-8 pb-10">
