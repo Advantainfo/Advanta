@@ -1,9 +1,15 @@
+import dynamic from "next/dynamic";
 import { WORK_ENTRIES } from "@/lib/content/work";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
-import { WorkCarousel } from "@/components/projects/WorkCarousel";
 import { InView } from "@/components/animations/InView";
+
+// Code-split: the carousel's drag/resize/idle-preload logic isn't needed for
+// the initial paint, so its JS ships as its own chunk instead of the main bundle.
+const WorkCarousel = dynamic(() =>
+  import("@/components/projects/WorkCarousel").then((m) => m.WorkCarousel),
+);
 
 export function WorkPreview() {
   const entries = WORK_ENTRIES.slice(0, 3);

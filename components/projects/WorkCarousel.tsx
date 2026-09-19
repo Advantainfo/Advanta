@@ -47,11 +47,13 @@ function CarouselCard({
   entry,
   index,
   active,
+  warm,
   interactive,
 }: {
   entry: WorkEntry;
   index: number;
   active: boolean;
+  warm: boolean;
   interactive: boolean;
 }) {
   return (
@@ -71,6 +73,7 @@ function CarouselCard({
           entry={entry}
           index={index}
           active={active}
+          warm={warm}
           objectFit="contain"
           className="absolute inset-0 h-full w-full"
         />
@@ -115,6 +118,21 @@ export function WorkCarousel({ entries }: { entries: WorkEntry[] }) {
 
   const step = cardWidth * (isDesktop ? 0.8 : 0.9);
 
+  // Once the page/active video have had a chance to settle, warm the *next* card's
+  // video (a light fetch, not full playback) so advancing the carousel feels instant.
+  const [warmIndex, setWarmIndex] = useState<number | null>(null);
+  useEffect(() => {
+    const nextIndex = (current + 1) % total;
+    const ric = window.requestIdleCallback;
+    const cic = window.cancelIdleCallback;
+    if (ric && cic) {
+      const id = ric(() => setWarmIndex(nextIndex), { timeout: 4000 });
+      return () => cic(id);
+    }
+    const id = window.setTimeout(() => setWarmIndex(nextIndex), 2000);
+    return () => window.clearTimeout(id);
+  }, [current, total]);
+
   const goNext = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
   const goPrev = useCallback(() => setCurrent((c) => (c - 1 + total) % total), [total]);
 
@@ -157,7 +175,13 @@ export function WorkCarousel({ entries }: { entries: WorkEntry[] }) {
                   }}
                   transition={{ duration: 0.7, ease: EASE }}
                 >
-                  <CarouselCard entry={entry} index={i} active={active} interactive={visible} />
+                  <CarouselCard
+                    entry={entry}
+                    index={i}
+                    active={active}
+                    warm={i === warmIndex}
+                    interactive={visible}
+                  />
                 </motion.div>
               </div>
             );
